@@ -11,7 +11,9 @@ int main(){
 
     vector<int> v1;
 
+    #pragma omp parallel for
     for(int i = 0; i < size; i++){
+        #pragma omp critical
         v1.push_back(i);
     }
 
@@ -23,6 +25,7 @@ int main(){
     start = chrono::high_resolution_clock::now();
 
     vector<float> v2(size);
+    #pragma omp parallel for
     for(int i = 0; i < size; i++){
         v2[i] = i;
     }

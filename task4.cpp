@@ -9,8 +9,15 @@ int main(){
 
     #pragma omp parallel for
     for(int i = 1000; i >= 0; i--){
-        if(i > max) max = i;
-        if(i < min) min = i;
+        #pragma omp critical
+        {
+            if(i > max) max = i;
+        }
+
+        #pragma omp critical
+        {
+            if(i < min) min = i;
+        }
     }
 
     cout << "Max: " << max << ", Min: " << min << endl;

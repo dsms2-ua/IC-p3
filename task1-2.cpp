@@ -14,8 +14,8 @@ int task(int id, int millis){
 int main(){
     auto start = chrono::high_resolution_clock::now();
 
-    future<int> task1 = async(task, 1, 2000);
-    future<int> task2 = async(task, 2, 3000);
+    future<int> task1 = async(launch::deferred, task, 1, 2000);
+    future<int> task2 = async(launch::deferred, task, 2, 3000);
 
     task1.wait();
     int taskId = task2.get();
